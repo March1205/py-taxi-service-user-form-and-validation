@@ -17,7 +17,7 @@ class DriverCreationForm(UserCreationForm):
     def clean_license_number(self):
         license_number = self.cleaned_data.get("license_number")
 
-        if len(license_number) != LicenseForm.MAX_LENGTH:
+        if len(license_number) != DriverLicenseUpdateForm.MAX_LENGTH:
             raise ValidationError(
                 "License number must consist of 8 characters."
             )
@@ -33,7 +33,7 @@ class DriverCreationForm(UserCreationForm):
         return license_number
 
 
-class LicenseForm(forms.ModelForm):
+class DriverLicenseUpdateForm(forms.ModelForm):
     MAX_LENGTH = 8
     license_number = forms.CharField(
         required=True,
