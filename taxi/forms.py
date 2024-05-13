@@ -15,13 +15,17 @@ class DriverCreationForm(UserCreationForm):
         )
 
     def clean_license_number(self):
-        license_number = self.cleaned_data.get('license_number')
+        license_number = self.cleaned_data.get("license_number")
 
         if len(license_number) != LicenseForm.MAX_LENGTH:
-            raise ValidationError("License number must consist of 8 characters.")
+            raise ValidationError(
+                "License number must consist of 8 characters."
+            )
 
         if not license_number[:3].isupper():
-            raise ValidationError("First 3 characters must be uppercase letters.")
+            raise ValidationError(
+                "First 3 characters must be uppercase letters."
+            )
 
         if not license_number[3:].isdigit():
             raise ValidationError("Last 5 characters must be digits.")
@@ -51,5 +55,3 @@ class CarForm(forms.ModelForm):
     class Meta:
         model = Car
         fields = "__all__"
-
-
